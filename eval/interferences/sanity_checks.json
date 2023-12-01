@@ -1,0 +1,33 @@
+[
+  {"MUL2319": {
+    "situation": "I've been cooped up in the hostel for too long. I'm going out with my friends for dinner next Monday. We'll be going to Backstreet Bistro, as my friend who works there is inviting us over for a special meal.",
+    "rand_idx": 0,
+    "context": "None\n",
+    "usr_utt": "'User: **Can you help me with finding a restaurant called backstreet bistro?**'",
+    "sys_resp": "'System: **Certainly. It is a gastropub located in the centre of town, and the address is 2 Sturton Street City Centre.**'",
+    "utt_with_backstory": "\"User: **Can you help me with finding a restaurant called backstreet bistro?** + <Backstory: I've been cooped up in the hostel for too long. I'm going out with my friends for dinner next Monday. We'll be going to Backstreet Bistro, as my friend who works there is inviting us over for a special meal.>\"",
+    "resp_with_reaction": "\"System: <Reaction: That sounds like a great plan! It's always nice to have a special meal with friends.> + **Certainly. It is a gastropub located in the centre of town, and the address is 2 Sturton Street City Centre.**\""
+  }
+},
+  {"MUL1740": {
+    "situation": "My boyfriend just started his summer break at Cambridge university. I'm heading over to his place soon, since it's been a while since I last visited him. He was busy doing coursework at Cambridge.",
+    "rand_idx": 0,
+    "context": "None\n",
+    "usr_utt": "'User: **I need to book a train to cambridge. I would like to arrive by 21:00**'",
+    "sys_resp": "'System: **There is a depature at london kings cross on friday which departs at 7:17.**'",
+    "utt_with_backstory": "\"User: **I need to book a train to cambridge. I would like to arrive by 21:00** + <Backstory: My boyfriend just started his summer break at Cambridge university. I'm heading over to his place soon, since it's been a while since I last visited him. He was busy doing coursework at Cambridge.>\"",
+    "resp_with_reaction": "\"System: <Reaction: Aww, that's sweet! I'm sure your boyfriend will be happy to see you.> + **There is a departure at London Kings Cross on Friday which departs at 7:17.**\""
+  }
+},
+{
+  "PMUL1352": {
+    "situation": "I'm making a video essay about historical museums in the country. I've read that Cambridge has some pretty quaint     museums with unique exhibitions and history. They will fit in great in my video essay.",
+    "rand_idx": 2,
+    "context": "\"User: I'm looking for a train to Cambridge, please.\",\n'System: Sure, where are you departing from?'",
+    "usr_utt": "'User: **I am departing from ely and want to leave on saturday. It should arrive by 20:45.**'",
+    "sys_resp": "'System: **The earliest leaves out of Ely at 05:35 and arrives in Cambridge at 05:52. Would you like to reserve a seat, or do you prefer to check for a later time?**'",
+    "utt_with_backstory": "\"User: **I am departing from ely and want to leave on saturday. It should arrive by 20:45.** + <Backstory: I'm actually doing research for a video essay about historical museums. I've heard that Cambridge has some quaint museums that would fit perfectly in my video essay. I'm excited to explore them!>\"",
+    "resp_with_reaction": "\"System: <Reaction: That sounds like a fascinating project! I'm sure you'll find Cambridge's museums to be a great addition to your video essay.> + **The earliest leaves out of Ely at 05:35 and arrives in Cambridge at 05:52. Would you like to reserve a seat, or do you prefer to check for a later time?**\""
+  }
+}
+]

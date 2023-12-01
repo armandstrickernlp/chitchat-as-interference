@@ -471,9 +471,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_name", type=str, default="meta-llama/Llama-2-70b-chat-hf")
     parser.add_argument("--data_split", type=str, default="valid", help="one of train, valid, test")
-    parser.add_argument("--training_batch_number", type=int, default=0)
-    parser.add_argument("--load_situations", type=bool, default=False)
-    parser.add_argument("--gen_sit_path", type=str, default="outputs/VALID/VALID_gen_situations.json")
+    parser.add_argument("--training_batch_number", type=int, default=0, help='one of 0,1,2 for train split') # run each batch in parallel vs fulll training set in one job
     args = parser.parse_args()
 
     pipe = make_pipe(model_name=args.model_name)
@@ -510,7 +508,7 @@ if __name__ == "__main__":
 
     # GENERATE SUMMARIZED SITUATIONS
     split_prep = get_prep_exchanges(prep, dial_nums)
-    if args.data_split == "train": # generate in parallel for large training set
+    if args.data_split == "train": # generate via different jobs
         train_nums = list(split_prep.keys())
         train_nums.sort()
         batch_size = len(train_nums) // 3
@@ -528,30 +526,15 @@ if __name__ == "__main__":
     ############################################################
     print(f"Number of examples: {len(split_prep)}")
 
-    if args.load_situations:
-        print(f"Loading generated situations from {args.gen_sit_path}")
-        with open(args.gen_sit_path) as f:
-            gen_situations = json.load(f)
-    else:
-        few_shot_sum = make_sumSit_prompt()
-        initial_gen_situations, sum_dial_nums, sum_dataset = prep_sum_data(split_prep, few_shot_sum=few_shot_sum)
-        gen_situations = generate_situations(initial_gen_situations, sum_dial_nums, sum_dataset, pipe)
+    few_shot_sum = make_sumSit_prompt()
+    initial_gen_situations, sum_dial_nums, sum_dataset = prep_sum_data(split_prep, few_shot_sum=few_shot_sum)
+    gen_situations = generate_situations(initial_gen_situations, sum_dial_nums, sum_dataset, pipe)
 
-        with open(os.path.join(out_path, 
-                               f"{args.data_split.upper()}_gen_situations.json"), "w") as f:
-            json.dump(gen_situations, f, indent=2)
+    with open(os.path.join(out_path, 
+                          "gen_situations.json"), "w") as f:
+        json.dump(gen_situations, f, indent=2)
     
-    # GENERATE CHITCHAT
-    compatible_turns = extract_domain_related_turns(mwoz)
-    few_shot_prompt_template = make_chitchat_prompt()
-    random.seed(42) # turns to augment are selected randomly within the compatible turns
-    initial_gen_chitchat, cc_dial_nums, cc_dataset = prep_chitchat_data(compatible_turns, gen_situations, few_shot_prompt_template=few_shot_prompt_template)
-    gen_chitchat = generate_chitchat(initial_gen_chitchat, cc_dial_nums, cc_dataset, pipe)
-
-    with open(os.path.join(out_path,
-                           f"{args.data_split.upper()}_gen_chitchat.json"), "w") as f:
-        json.dump(gen_chitchat, f, indent=2)
-    
+  
 
 
     

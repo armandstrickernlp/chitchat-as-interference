@@ -1,0 +1,26 @@
+[
+    {
+      "pmul1283": {
+        "context": "<|context|> <|user|> I would like to get some information about colleges to visit? <|system|> There is Christ's College, Churchill College, Clare College, Clare Hall, Corpus Christi, Downing College, Emmanuel College, and Huges Hall. Would you like me to list more? <|user|> May I please have entrance fees, phone numbers, and post codes? <|system|> I'll start out by giving you Christ's College. The phone number is 01223334900, the entrance is free, and the post code is cb23bu. Do you need more than that? <|user|> I would like to know the entrance fee. I've just graduated from high school and I'm looking to further my studies. I'm excited to visit some colleges! <|endofcontext|> ",
+        "simpletod": "The entrance fee is [entrancefee] . Is there anything else I can help you with?",
+        "fusedchat": "The entrance fee is [entrancefee] . Is there anything else I can help you with?",
+        "interference": "Congratulations on your graduation! I'm sure you'll do great in your future endeavors. The entrance fee is [entrancefee] . Is there anything else I can help you with?"
+      }
+    },
+    {
+        "mul1024": {
+          "context": "<|context|> <|user|> I'm looking for a theatre to visit in the centre of Cambridge. Can you help me with this? My mom is coming to visit me next week! I can't wait to bring her to tour the city! She sure loves to watch a good musical! I'm looking to bring her to the theatre! <|endofcontext|> ",
+          "simpletod": "There are [name] , [name] , and [name] .",
+          "fusedchat": "I'm sure she would love it! There are 2 theatres in the centre of Cambridge. Would you like me to recommend one to you?",
+          "interference": "That's great! It's always wonderful to share quality time with family. I'm sure your mom will appreciate the gesture. There are [choice]  [type]  in the [area] . [name]  is in the [area] . Would you like more information?"
+        }
+    },
+    {
+        "mul1799": {
+          "context": "<|context|> <|user|> I need to take a train from cambridge, I need to arrive by 18:30. I'm doing some research on parks for my project. I've already visited all the parks in Cambridge, so I'm looking to travel further for my research. I'm hoping to find some parks that are easily accessible by train. <|endofcontext|> ",
+          "simpletod": "Where would you like to go?",
+          "fusedchat": "I'm sure there are plenty of parks near Cambridge.",
+          "interference": "That's a great idea! I'm sure you'll find some amazing parks to add to your research. I can help you with that. Where would you like to go?"
+        }
+    }
+]

@@ -478,8 +478,8 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_name", type=str, default="meta-llama/Llama-2-70b-chat-hf")
-    parser.add_argument("--gen_sit_path", type=str, default="outputs/VALID/VALID_gen_situations.json")
-    parser.add_argument("--gen_back_path", type=str, default="outputs/VALID/gen_backstories.json")
+    parser.add_argument("--gen_sit_path", type=str, default="outputs/VALID/gen_situations.json", help="path to generated situations")
+    parser.add_argument("--gen_back_path", type=str, default="outputs/VALID/gen_backstories.json", help='path to generated backstories if they already exist')
     args = parser.parse_args()
 
     pipe = make_pipe(model_name=args.model_name)
@@ -490,7 +490,7 @@ if __name__ == "__main__":
         mwoz = json.load(f)
     
     out_path = f"outputs/{args.gen_sit_path.split('/')[1]}"
-    print(f"Saving augmented turns to {out_path}")
+    print(f"Saving backstories to {out_path}")
     os.makedirs(out_path, exist_ok=True)
     
     print(f"Loading generated situations from {args.gen_sit_path}")
@@ -507,7 +507,7 @@ if __name__ == "__main__":
         json.dump(final_gen_usr_back, f, indent=2)
 
     out_path = f"outputs/{args.gen_back_path.split('/')[1]}"
-    print(f"Saving augmented turns to {out_path}")
+    print(f"Saving reactions to {out_path}")
     os.makedirs(out_path, exist_ok=True)
 
     # print(f"Loading generated backstories from {args.gen_back_path}")
