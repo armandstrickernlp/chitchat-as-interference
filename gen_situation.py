@@ -471,7 +471,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_name", type=str, default="meta-llama/Llama-2-70b-chat-hf")
     parser.add_argument("--data_split", type=str, default="valid", help="one of train, valid, test")
-    parser.add_argument("--training_batch_number", type=int, default=0, help='select 0, 1 or 2. Merge back together into a single json after generating for each batch.') # run each batch in parallel vs full training set in one job
+    parser.add_argument("--training_batch_number", type=int, default=0, help='select 0, 1 or 2. Merge back together into a single json after.') # run each batch in parallel vs full training set in one job
     args = parser.parse_args()
 
     pipe = make_pipe(model_name=args.model_name)
