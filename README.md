@@ -54,9 +54,9 @@ sbatch  launch_train_and_generate_and_eval.sh
 ```
 
 Possible train+eval setups are:
-- train on vanilla mwoz | eval: vanilla mwoz (for reference)
+- train on vanilla mwoz | eval: vanilla mwoz (as reference)
 - train on vanilla mwoz | eval: interference
-- train on fusedchat | eval: interference
+- train on prepended fusedchat | eval: interference
 - train on interference | eval: interference
 
 To perform generation and evaluation on a model already fine-tuned, run the `gen_and_evaluate.py` script or modify and submit `launch_gen_and_eval.sh`.
