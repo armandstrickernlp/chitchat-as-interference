@@ -17,30 +17,29 @@ cd chitchat-as-interference
 pip install -r requirements.txt
 ```
 
-
-### Data 
-Download the MultiWOZ2.2 dataset from [here](https://huggingface.co/datasets/multi_woz_v22) or [here](https://github.com/budzianowski/multiwoz/tree/master/data/MultiWOZ_2.2). Follow guidelines to convert the data to MultiWOZ2.1 format: you should have one single `.json` with all the annotated dialogues. Also download Fusedchat dialogues from [here](https://github.com/tomyoung903/FusedChat). The file needed is `fusedchat_prepended.json`.  Add both `.jsons` to `data`.
-
 ## Generating the Interferences
-1. Generate seed situations using the prepended FusedChat exchanges.  Check the script to make sure paths are correct and set the desired arguments.
+Augmented dialogues can be directly found in `data/interference_data/`. Augmented dialogues will have an `augmented_idx` key with the idxs of the turns augmented.  For the augmented turns, the user will have a `backstory` key with the backstory to append and the system will have a `reaction` key with the supportive reaction to prepend to the original text.  
+
+Here is the pipeline used for reference or modification:
+
+1. Download the MultiWOZ2.2 dataset from [here](https://github.com/budzianowski/multiwoz/tree/master/data/MultiWOZ_2.2). Follow guidelines to convert the data to MultiWOZ2.1 format at the bottom of the page: you should have one single `.json` with all the annotated dialogues. Also download Fusedchat dialogues from [here](https://github.com/tomyoung903/FusedChat). The file needed is `fusedchat_prepended.json`.  Add both `.jsons` to `data`.
+
+2. Generate seed situations in a few-shot manner using the prepended FusedChat exchanges.  Check the script for paths are correct and set the desired arguments. You can separate the training data into several bathces to parallelize if needed. (Don't forget to merge the split back together afterwards.)
 ```
-python gen_situations.py --model_name=<...> --data_split=<...> --training_batch_number=<...>
+python gen_situation.py --model_name=<...> --data_split=<...> --training_batch_number=<...>
 ``` 
-2. Augment radnom user turns with backstory and the following system responses with a supportive reaction. Check the script to make sure paths are correct and set the desired arguments.
+3. Augment random user turns with backstory and the following system responses with a supportive reaction. Pass in the path for the generated situations. Optiionally add the backstory path if already generated. Check argparse arguments for more details.
 ```
 python gen_chitchat.py --model_name=<...> --gen_sit_path=<...> --gen_back_path=<...>
 ```
-For steps 1. and 2. you can also modify the following scripts to run the jobs on slurm:
+For steps 2. and 3. you can also use and modify the following scripts to run the jobs on slurm:
 ```
 sbatch launch_gen.sh
 ```
-3. Combine train batches into a single `.json` with `python combine_train_batches.py`.
 4. Filter and merge interferences into mwoz: 
 ```
 python merge_interferences.py --interference_path=<...> --split=<...>
 ```  
-Dialogues will have an `augmented_idx` key with the idxs of the turns augmented.  At those turns, the user will have a `backstory` key with the backstory to append and the system will have a `reaction` key with the supportive reaction to prepend.
-
 
 ## Preparing Data for Training
 Prepare training data for SimpleToD. In the `data` directory, run `python prep_simpletod_data.py`. Check paths are correct in the script. This will output an `lm_data` directory.
