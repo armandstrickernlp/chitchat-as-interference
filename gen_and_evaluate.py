@@ -1,3 +1,7 @@
+"""
+Same as train_and_generate_and_eval.py but without training pipeline. Directly generate adn evaluate from a lora checkpoint.
+"""
+
 import argparse
 import os
 import json
