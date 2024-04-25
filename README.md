@@ -59,7 +59,7 @@ Possible train+eval setups are:
 - train on prepended fusedchat | eval: interference
 - train on interference | eval: interference
 
-To perform generation and evaluation on a model already fine-tuned, run the `gen_and_evaluate.py` script or modify and submit `launch_gen_and_eval.sh`.
+To only perform generation and evaluation, using previously trained lora weights, run the `gen_and_evaluate.py` script or modify and submit `launch_gen_and_eval.sh`.
 
 ### Eval Interface
 Interfaces for evalauting the quality of the generated interferences and of the different model responses are in the `eval` directory.
